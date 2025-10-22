@@ -1,11 +1,12 @@
-package com.example.auth.services;
+package com.danilo.auth.services;
 
-import com.example.auth.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.danilo.auth.repositories.UserRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {

@@ -1,4 +1,4 @@
-package com.example.auth.domain.product;
+package com.danilo.auth.domain.product;
 
 public record ProductResponseDTO(String id, String name, Integer price) {
     public ProductResponseDTO(Product product){
