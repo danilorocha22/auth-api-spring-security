@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private String password;
     private UserRole role;
 
-    public User(String login, String password, UserRole role){
+    public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -34,8 +34,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return (this.role == UserRole.ADMIN)
+                ? List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"))
+                : List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
