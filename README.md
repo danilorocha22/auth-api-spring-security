@@ -14,7 +14,7 @@ Executar na raiz do projeto:
 * mvn clean package -DskipTests
 
 O arquivo JAR será gerado em:
-* target/auth-api-spring-security.jar
+* target/app.jar
 
 
 🐳 2. Gerenciamento com Docker
