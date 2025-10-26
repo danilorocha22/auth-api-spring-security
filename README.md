@@ -1,73 +1,84 @@
-# Authentication API
+📌 README — Auth API Spring Security + Docker + Perfis Dev e Prod
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-
-This project is an API built using **Java, Java Spring, Flyway Migrations, PostgresSQL as the database, and Spring Security and JWT for authentication control.**
-
-The API was developed for my [Youtube Tutorial](https://www.youtube.com/watch?v=5w-YCcOjPD0), to demonstrate how to configure Authenticatio and Authorization in Spring application using Spring Security.
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Authentication](#authentication)
-- [Database](#database)
-- [Contributing](#contributing)
-
-## Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/Fernanda-Kipper/auth-api.git
-```
-
-2. Install dependencies with Maven
-
-3. Install [PostgresSQL](https://www.postgresql.org/)
-
-## Usage
-
-1. Start the application with Maven
-2. The API will be accessible at http://localhost:8080
+✅ Requisitos
+Certifique-se de possuir instalados:
+* Java 17
+* Maven 3.9+
+* Docker e Docker Compose
+* VS Code (opcional, com extensão Docker)
 
 
-## API Endpoints
-The API provides the following endpoints:
+🧹 1. Limpeza e build do projeto
 
-```markdown
-GET /product - Retrieve a list of all products. (all authenticated users)
+Executar na raiz do projeto:
+* mvn clean package -DskipTests
 
-POST /product - Register a new product (ADMIN access required).
-
-POST /auth/login - Login into the App
-
-POST /auth/register - Register a new user into the App
-```
-
-## Authentication
-The API uses Spring Security for authentication control. The following roles are available:
-
-```
-USER -> Standard user role for logged-in users.
-ADMIN -> Admin role for managing partners (registering new partners).
-```
-To access protected endpoints as an ADMIN user, provide the appropriate authentication credentials in the request header.
-
-## Database
-The project utilizes [PostgresSQL](https://www.postgresql.org/) as the database. The necessary database migrations are managed using Flyway.
-
-## Contributing
-
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request to the repository.
-
-When contributing to this project, please follow the existing code style, [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/), and submit your changes in a separate branch.
+O arquivo JAR será gerado em:
+* target/auth-api-spring-security.jar
 
 
+🐳 2. Gerenciamento com Docker
+
+Listar containers em execução
+* docker ps
+
+Parar um container específico
+* docker stop <CONTAINER_ID>
+
+Parar todos os containers ativos
+* docker stop $(docker ps -q)
+
+Remover containers parados
+* docker container prune -f
 
 
+🌱 3. Ambiente de Desenvolvimento (DEV)
+📄 3.1 Arquivo .env.dev
+O Docker Compose usará este arquivo para configurar o container em modo dev.
+
+Para subir o ambiente DEV:
+* docker-compose --env-file .env.dev up --build
+
+Para rodar em background:
+* docker-compose --env-file .env.dev up --build -d
+
+Ver logs:
+* docker logs -f spring_backend
+
+Testar disponibilidade da aplicação:
+* curl http://localhost:8080/actuator/health
+
+
+🚀 4. Ambiente de Produção (PROD)
+📄 4.1 Arquivo .env.prod
+Deve conter as variáveis de produção, incluindo credenciais do banco.
+
+Subir containers em modo PROD:
+* docker-compose --env-file .env.prod up --build
+
+Rodar em background:
+* docker-compose --env-file .env.prod up --build -d
+
+
+🧽 5. Comandos úteis
+
+Ver logs do PostgreSQL
+* docker logs -f postgres
+
+Acessar o banco via psql dentro do container
+* docker exec -it postgres psql -U postgres
+
+Derrubar containers e volumes
+* docker-compose down -v
+
+
+✅ Fluxo completo para DEV
+* mvn clean package -DskipTests
+* docker-compose --env-file .env.dev up --build -d
+* curl http://localhost:8080/actuator/health
+
+
+✅ Fluxo completo para PROD
+* mvn clean package -DskipTests
+* docker-compose --env-file .env.prod up --build -d
+* curl http://localhost:8080/actuator/health
