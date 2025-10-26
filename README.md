@@ -81,11 +81,12 @@ Derrubar containers e volumes
 ✅ Fluxo completo para DEV
 * mvn clean package -DskipTests
 * docker-compose --env-file .env.dev up --build -d
-* curl http://localhost:8080/actuator/health
+* curl http://localhost:8080/actuator/health ou http://localhost:8080/actuator/health | ConvertFrom-Json
+
 <br>
 
 
 ✅ Fluxo completo para PROD
 * mvn clean package -DskipTests
 * docker-compose --env-file .env.prod up --build -d
-* curl http://localhost:8080/actuator/health
+* curl http://localhost:8080/actuator/health ou http://localhost:8080/actuator/health | ConvertFrom-Json
