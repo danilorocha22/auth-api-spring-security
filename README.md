@@ -6,6 +6,7 @@ Certifique-se de possuir instalados:
 * Maven 3.9+
 * Docker e Docker Compose
 * VS Code (opcional, com extensão Docker)
+<br>
 
 
 🧹 1. Limpeza e build do projeto
@@ -15,6 +16,7 @@ Executar na raiz do projeto:
 
 O arquivo JAR será gerado em:
 * target/app.jar
+<br>
 
 
 🐳 2. Gerenciamento com Docker
@@ -30,6 +32,7 @@ Parar todos os containers ativos
 
 Remover containers parados
 * docker container prune -f
+<br>
 
 
 🌱 3. Ambiente de Desenvolvimento (DEV)
@@ -47,6 +50,7 @@ Ver logs:
 
 Testar disponibilidade da aplicação:
 * curl http://localhost:8080/actuator/health
+<br>
 
 
 🚀 4. Ambiente de Produção (PROD)
@@ -58,6 +62,7 @@ Subir containers em modo PROD:
 
 Rodar em background:
 * docker-compose --env-file .env.prod up --build -d
+<br>
 
 
 🧽 5. Comandos úteis
@@ -70,12 +75,14 @@ Acessar o banco via psql dentro do container
 
 Derrubar containers e volumes
 * docker-compose down -v
+<br>
 
 
 ✅ Fluxo completo para DEV
 * mvn clean package -DskipTests
 * docker-compose --env-file .env.dev up --build -d
 * curl http://localhost:8080/actuator/health
+<br>
 
 
 ✅ Fluxo completo para PROD
