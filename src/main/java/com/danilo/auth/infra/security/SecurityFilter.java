@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.danilo.auth.domain.user.User;
 import com.danilo.auth.repositories.UserRepository;
 
 import jakarta.servlet.FilterChain;
@@ -35,8 +36,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (nonNull(token)) {
             var login = tokenService.validateToken(token);
-            UserDetails user = userRepository.findByLogin(login);
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            User user = userRepository.findByLogin(login);
+            UserAuth userAuth = new UserAuth(user);
+            var authentication = new UsernamePasswordAuthenticationToken(user, null, userAuth.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

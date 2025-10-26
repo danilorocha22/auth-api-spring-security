@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  postgresdb:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: spring_backend
+    env_file:
+      - ${ENV_FILE}   # .env.dev ou .env.prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresdb
+
+volumes:
+  postgres_data:
