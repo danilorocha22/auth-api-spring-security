@@ -25,4 +25,7 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Comando para rodar a aplicação usando o perfil definido no .env
-ENTRYPOINT ["sh", "-c", "java -jar app.jar --spring.profiles.active=$SPRING_PROFILES_ACTIVE"]
+ENTRYPOINT ["sh", "-c", "java -XX:-UseContainerSupport -jar app.jar \
+    --spring.profiles.active=$SPRING_PROFILES_ACTIVE \
+    --management.metrics.binders.processor.enabled=false \
+    --management.metrics.binders.tomcat.enabled=false"]
