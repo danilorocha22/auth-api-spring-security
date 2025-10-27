@@ -1,12 +1,39 @@
 📌 README — Auth API Spring Security + Docker + Perfis Dev e Prod
 
-✅ Requisitos
-Certifique-se de possuir instalados:
-* Java 17
-* Maven 3.9+
-* Docker e Docker Compose
-* VS Code (opcional, com extensão Docker)
-<br>
+# 📌 Auth API Spring Security + Docker + Perfis Dev e Prod
+
+Este projeto é uma API de autenticação e segurança baseada em Spring Boot, utilizando Spring Security com JWT, persistência via JPA/Hibernate e PostgreSQL, tudo empacotado para execução em contêineres Docker, com suporte a perfis de Desenvolvimento (DEV) e Produção (PROD).
+
+## ✅ Requisitos
+
+Certifique-se de possuir as seguintes ferramentas instaladas e configuradas:
+* **Java 17**
+* **Maven 3.9+**
+* **Docker e Docker Compose**
+* VS Code (opcional, com a extensão Docker)
+
+---
+
+## ⚙️ Configuração de Variáveis de Ambiente (SO/Shell)
+
+Seu `docker-compose.yml` utiliza a sintaxe `${VARIAVEL}` para ler variáveis diretamente do **sistema operacional (shell)**. Elas devem ser configuradas *antes* de executar o Docker Compose.
+
+| Variável | Descrição | Exemplo de Valor (Dev) |
+| :--- | :--- | :--- |
+| **`DB_NAME`** | Nome do banco de dados PostgreSQL. | `mydatabase` |
+| **`DB_USER`** | Usuário do banco de dados PostgreSQL. | `postgres` |
+| **`DB_PASSWORD`** | Senha do banco de dados PostgreSQL. | `admin` |
+| **`ENV_FILE`** | Caminho para o arquivo `.env` específico do ambiente. | `.env.dev` ou `.env.prod` |
+
+**Como configurar (Exemplo Linux/macOS/Git Bash):**
+
+```bash
+# Configure as variáveis abaixo em seu terminal antes de executar o Docker Compose
+export DB_NAME=mydatabase
+export DB_USER=postgres
+export DB_PASSWORD=admin
+# Defina o arquivo de ambiente que será carregado (para o ambiente DEV)
+export ENV_FILE=.env.dev
 
 
 🧹 1. Limpeza e build do projeto
@@ -17,7 +44,6 @@ Executar na raiz do projeto:
 O arquivo JAR será gerado em:
 * target/app.jar
 <br>
-
 
 🐳 2. Gerenciamento com Docker
 
